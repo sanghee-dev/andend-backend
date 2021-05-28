@@ -1,7 +1,7 @@
 import { gql } from "apollo-server";
 
-export const typeDefs = gql`
+export default gql`
   type Query {
-    seeMovie(id: Int!): Movie
+    seeProfile(username: String!): User
   }
 `;
