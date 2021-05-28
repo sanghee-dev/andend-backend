@@ -1,5 +1,6 @@
 import client from "../../client";
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 export default {
   Query: {
@@ -19,8 +20,12 @@ export default {
             error: "Incorrect password.",
           };
 
+        const token = await jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+          expiresIn: "365 days",
+        });
         return {
           ok: true,
+          token,
         };
       } catch (e) {
         return e;
