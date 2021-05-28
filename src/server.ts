@@ -14,7 +14,7 @@ const typeDefs = gql`
   }
   type Query {
     movies: [Movie]
-    movie: Movie
+    movie(id: Int!): Movie
   }
   type Mutation {
     createMovie(title: String!, year: Int!, genre: String): Movie
@@ -41,7 +41,10 @@ const resolvers = {
           genre,
         },
       }),
-    deleteMovie: (_, { id }) => "",
+    deleteMovie: (_, { id }) =>
+      client.movie.delete({
+        where: { id },
+      }),
   },
 };
 
