@@ -1,11 +1,10 @@
-import client from "../../client";
 import * as bcrypt from "bcrypt";
 import { protectResolver } from "../users.utils";
 
 const resolverFn = async (
   _,
   { firstName, lastName, username, email, password: newPassword },
-  { loggedInUser }
+  { loggedInUser, client }
 ) => {
   let uglyPassword = null;
   if (newPassword) uglyPassword = await bcrypt.hash(newPassword, 10);

@@ -1,10 +1,9 @@
-import client from "../../client";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
 export default {
   Query: {
-    login: async (_, { username, password }) => {
+    login: async (_, { username, password }, { client }) => {
       try {
         const user = await client.user.findFirst({
           where: {
