@@ -1,5 +1,5 @@
 import client from "../../client";
-const bcrypt = require("bcrypt");
+import * as bcrypt from "bcrypt";
 
 export default {
   Mutation: {

@@ -1,6 +1,6 @@
 import client from "../../client";
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 
 export default {
   Query: {
