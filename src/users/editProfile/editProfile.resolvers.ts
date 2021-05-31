@@ -7,13 +7,16 @@ const resolverFn = async (
   { firstName, lastName, username, email, password: newPassword, bio, avatar },
   { loggedInUser, client }
 ) => {
+  let avatarUrl = null;
   if (avatar) {
     const { filename, createReadStream } = await avatar;
+    const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
     const readStream = createReadStream();
     const whiteStream = createWriteStream(
-      process.cwd() + "/uploads/" + filename
+      process.cwd() + "/uploads/" + newFilename
     );
     readStream.pipe(whiteStream);
+    avatarUrl = `http://localhost:4000/static/${newFilename}`;
   }
 
   let uglyPassword = null;
@@ -30,7 +33,7 @@ const resolverFn = async (
       email,
       ...(uglyPassword && { password: uglyPassword }),
       bio,
-      avatar,
+      ...(avatarUrl && { avatar: avatarUrl }),
     },
   });
   if (updatedUser) {
