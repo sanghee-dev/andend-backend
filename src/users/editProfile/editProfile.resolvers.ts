@@ -7,10 +7,14 @@ const resolverFn = async (
   { firstName, lastName, username, email, password: newPassword, bio, avatar },
   { loggedInUser, client }
 ) => {
-  const { filename, createReadStream } = await avatar;
-  const readStream = createReadStream();
-  const whiteStream = createWriteStream(process.cwd() + "/uploads/" + filename);
-  readStream.pipe(whiteStream);
+  if (avatar) {
+    const { filename, createReadStream } = await avatar;
+    const readStream = createReadStream();
+    const whiteStream = createWriteStream(
+      process.cwd() + "/uploads/" + filename
+    );
+    readStream.pipe(whiteStream);
+  }
 
   let uglyPassword = null;
   if (newPassword) uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -25,6 +29,8 @@ const resolverFn = async (
       username,
       email,
       ...(uglyPassword && { password: uglyPassword }),
+      bio,
+      avatar,
     },
   });
   if (updatedUser) {
