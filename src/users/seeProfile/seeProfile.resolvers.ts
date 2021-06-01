@@ -2,10 +2,16 @@ import { Resolvers } from "../../types";
 
 const resolvers: Resolvers = {
   Query: {
-    seeProfile: (_, { username }, { client }) =>
-      client.user.findUnique({
-        where: { username },
-      }),
+    seeProfile: async (_, { username }, { client }) => {
+      try {
+        const user = await client.user.findUnique({ where: { username } });
+        if (!user) return { ok: false, error: "Cannot find user." };
+
+        return { ok: true, user };
+      } catch {
+        return { ok: false, error: "Cannot see profile:(" };
+      }
+    },
   },
 };
 

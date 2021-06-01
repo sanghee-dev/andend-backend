@@ -4,7 +4,6 @@ export default gql`
   type EditProfileResult {
     ok: Boolean!
     error: String
-    token: String
   }
   type Mutation {
     editProfile(
