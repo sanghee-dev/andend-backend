@@ -10,19 +10,19 @@ const resolverFn = async (_, { username }, { loggedInUser, client }) => {
 
     const updatedUser = await client.user.update({
       where: { id: loggedInUser.id },
-      data: { following: { connect: { username } } },
+      data: { following: { disconnect: { username } } },
     });
     if (!updatedUser) return { ok: false, error: "Cannot update user." };
 
     return { ok: true };
   } catch {
-    return { ok: false, error: "Cannot follow user:(" };
+    return { ok: false, error: "Cannot unfollow user:(" };
   }
 };
 
 const resolvers: Resolvers = {
   Mutation: {
-    followUser: protectResolver(resolverFn),
+    unfollowUser: protectResolver(resolverFn),
   },
 };
 
