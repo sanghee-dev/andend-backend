@@ -12,5 +12,7 @@ export default gql`
     password: String!
     bio: String
     avatar: String
+    followers: [User]
+    following: [User]
   }
 `;
