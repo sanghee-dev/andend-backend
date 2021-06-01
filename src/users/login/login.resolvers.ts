@@ -1,7 +1,8 @@
+import { Resolvers } from "../../types";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
-export default {
+const resolvers: Resolvers = {
   Mutation: {
     login: async (_, { username, password }, { client }) => {
       try {
@@ -23,3 +24,5 @@ export default {
     },
   },
 };
+
+export default resolvers;
