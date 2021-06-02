@@ -10,7 +10,7 @@ const resolvers: Resolvers = {
         if (!tag) return { ok: false, error: "Cannot find hashtag." };
 
         return { ok: true, hashtag: tag };
-      } catch (e) {
+      } catch {
         return { ok: false, error: "Cannot see hashtag:(" };
       }
     },

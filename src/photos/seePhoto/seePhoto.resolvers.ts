@@ -10,7 +10,7 @@ const resolvers: Resolvers = {
         if (!photo) return { ok: false, error: "Cannot find photo:(" };
 
         return { ok: true, photo };
-      } catch (e) {
+      } catch {
         return { ok: false, error: "Cannot see photo:(" };
       }
     },
