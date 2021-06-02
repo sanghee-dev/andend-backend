@@ -11,9 +11,8 @@ const resolverFn = async (_, { file, caption }, { loggedInUser, client }) => {
         create: { hashtag },
       }));
     }
-    console.log(hashtagObjArr);
 
-    await client.photo.create({
+    const photo = await client.photo.create({
       data: {
         user: { connect: { id: loggedInUser.id } },
         file,
@@ -23,10 +22,10 @@ const resolverFn = async (_, { file, caption }, { loggedInUser, client }) => {
         },
       },
     });
+    if (!photo) return { ok: false, error: "Cannot create photo." };
 
-    return { ok: true, photo: "" };
-  } catch (e) {
-    console.log(e);
+    return { ok: true, photo: file };
+  } catch {
     return { ok: false, error: "Cannot upload photo:(" };
   }
 };
