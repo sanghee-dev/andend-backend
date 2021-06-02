@@ -8,7 +8,7 @@ const resolvers: Resolvers = {
           where: { username },
           include: { followers: true, following: true },
         });
-        if (!user) return { ok: false, error: "That user does not exist." };
+        if (!user) return { ok: false, error: "User not found." };
 
         return { ok: true, user };
       } catch {

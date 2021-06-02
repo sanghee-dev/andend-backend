@@ -7,7 +7,7 @@ const resolverFn = async (_, { username }, { loggedInUser, client }) => {
       where: { username },
       select: { id: true },
     });
-    if (!ok) return { ok: false, error: "That user does not exist." };
+    if (!ok) return { ok: false, error: "User not found." };
 
     const updatedUser = await client.user.update({
       where: { id: loggedInUser.id },

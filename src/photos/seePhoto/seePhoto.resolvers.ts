@@ -7,7 +7,7 @@ const resolvers: Resolvers = {
         const photo = await client.photo.findUnique({
           where: { id },
         });
-        if (!photo) return { ok: false, error: "Cannot find photo:(" };
+        if (!photo) return { ok: false, error: "Photo not found." };
 
         return { ok: true, photo };
       } catch {

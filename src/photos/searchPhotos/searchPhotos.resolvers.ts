@@ -9,7 +9,7 @@ const resolvers: Resolvers = {
           skip: (page - 1) * 5,
           take: 5,
         });
-        if (!photos) return { ok: false, error: "Cannot search photos." };
+        if (!photos) return { ok: false, error: "Photos not found." };
 
         return { ok: true, photos };
       } catch {

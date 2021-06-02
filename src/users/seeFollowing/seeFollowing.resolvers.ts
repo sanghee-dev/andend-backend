@@ -8,7 +8,7 @@ const resolvers: Resolvers = {
           where: { username },
           select: { id: true },
         });
-        if (!ok) return { ok: false, error: "That user does not exist." };
+        if (!ok) return { ok: false, error: "User not found." };
 
         const following = await client.user
           .findUnique({ where: { username } })

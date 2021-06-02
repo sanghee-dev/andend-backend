@@ -7,7 +7,7 @@ const resolvers: Resolvers = {
         const tag = await client.hashtag.findUnique({
           where: { hashtag },
         });
-        if (!tag) return { ok: false, error: "Cannot find hashtag." };
+        if (!tag) return { ok: false, error: "Hashtag not found." };
 
         return { ok: true, hashtag: tag };
       } catch {
