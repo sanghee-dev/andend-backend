@@ -8,6 +8,8 @@ const resolvers: Resolvers = {
       await client.hashtag.findMany({
         where: { photos: { some: { id } } },
       }),
+    likes: async ({ id }, _, { client }) =>
+      await client.like.count({ where: { photoId: id } }),
   },
 };
 
