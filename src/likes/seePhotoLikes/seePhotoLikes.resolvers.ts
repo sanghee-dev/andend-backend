@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
 
         return { ok: true, users: likes.map((like) => like.user) };
       } catch {
-        return { ok: false, error: "Cannot see photo likes:(" };
+        return { ok: false, error: "Cannot see likes:(" };
       }
     },
   },
