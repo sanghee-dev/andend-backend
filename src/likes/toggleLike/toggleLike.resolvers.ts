@@ -1,4 +1,3 @@
-import photosTypeDefs from "../../photos/photos.typeDefs";
 import { Resolvers } from "../../types";
 import { protectResolver } from "../../users/users.utils";
 
