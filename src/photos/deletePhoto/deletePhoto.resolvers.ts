@@ -17,7 +17,6 @@ const resolverFn = async (_, { id }, { loggedInUser, client }) => {
     const deleteComments = await client.comment.deleteMany({
       where: { photoId: id },
     });
-
     const deletePhoto = await client.photo.delete({ where: { id } });
 
     return { ok: true };
