@@ -14,7 +14,6 @@ const resolverFn = async (_, { page }, { loggedInUser, client }) => {
       skip: (page - 1) * 5,
       take: 5,
     });
-
     if (!photos) return { ok: false, error: "Photos not found." };
 
     return { ok: true, photos };

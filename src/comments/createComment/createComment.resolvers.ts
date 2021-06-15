@@ -11,7 +11,7 @@ const resolverFn = async (
       where: { id: photoId },
       select: { id: true },
     });
-    if (!photo) return { ok: false, error: "Cannot find photo." };
+    if (!photo) return { ok: false, error: "Photo not found." };
 
     const comment = await client.comment.create({
       data: {

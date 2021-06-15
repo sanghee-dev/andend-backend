@@ -4,11 +4,11 @@ const resolvers: Resolvers = {
   Query: {
     seeFollowers: async (_, { username, page }, { client }) => {
       try {
-        const ok = await client.user.findUnique({
+        const user = await client.user.findUnique({
           where: { username },
           select: { id: true },
         });
-        if (!ok) return { ok: false, error: "User not found." };
+        if (!user) return { ok: false, error: "User not found." };
 
         const followers = await client.user
           .findUnique({ where: { username } })

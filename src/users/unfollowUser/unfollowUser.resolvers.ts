@@ -3,11 +3,11 @@ import { protectResolver } from "../users.utils";
 
 const resolverFn = async (_, { username }, { loggedInUser, client }) => {
   try {
-    const ok = await client.user.findUnique({
+    const user = await client.user.findUnique({
       where: { username },
       select: { id: true },
     });
-    if (!ok) return { ok: false, error: "User not found." };
+    if (!user) return { ok: false, error: "User not found." };
 
     const updatedUser = await client.user.update({
       where: { id: loggedInUser.id },

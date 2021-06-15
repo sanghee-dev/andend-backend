@@ -9,6 +9,8 @@ const resolvers: Resolvers = {
           skip: (page - 1) * 5,
           take: 5,
         });
+        if (!users) return { ok: false, error: "Users not found" };
+
         const totalUsers = await client.user.count({
           where: { username: { contains: keyword.toLowerCase() } },
         });

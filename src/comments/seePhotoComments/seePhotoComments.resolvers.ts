@@ -10,7 +10,7 @@ export const resolvers: Resolvers = {
           skip: (page - 1) * 5,
           take: 5,
         });
-        if (!comments) return { ok: false, error: "Cannot find comments." };
+        if (!comments) return { ok: false, error: "Comments not found." };
 
         return { ok: true, comments };
       } catch {

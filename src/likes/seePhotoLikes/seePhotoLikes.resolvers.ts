@@ -10,6 +10,7 @@ const resolvers: Resolvers = {
           skip: (page - 1) * 5,
           take: 5,
         });
+        if (!likes) return { ok: false, error: "Like not found." };
 
         return { ok: true, users: likes.map((like) => like.user) };
       } catch {
