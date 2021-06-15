@@ -8,5 +8,6 @@ export default gql`
     photo: Photo!
     user: User!
     payload: String!
+    isMine: Boolean!
   }
 `;

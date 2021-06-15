@@ -11,5 +11,6 @@ export default gql`
     hashtags: [Hashtag]
     likes: Int!
     comments: Int!
+    isMine: Boolean!
   }
 `;
