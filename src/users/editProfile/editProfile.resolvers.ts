@@ -11,7 +11,7 @@ const resolverFn = async (
   try {
     let avatarUrl = null;
     if (avatar)
-      avatarUrl = await uploadToAWS(avatar, loggedInUser.id, "uploads");
+      avatarUrl = await uploadToAWS(avatar, loggedInUser.id, "avatar");
 
     let uglyPassword = null;
     if (newPassword) uglyPassword = await bcrypt.hash(newPassword, 10);
