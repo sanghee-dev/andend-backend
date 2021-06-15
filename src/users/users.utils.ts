@@ -1,7 +1,7 @@
 import client from "../client";
 import * as jwt from "jsonwebtoken";
 
-export const getUser = async (token) => {
+export const getUser = async (token: string) => {
   try {
     if (!token) return null;
     const verifiedToken = await jwt.verify(token, process.env.SECRET_KEY);
