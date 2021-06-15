@@ -1,7 +1,7 @@
 import { Resolvers } from "../../types";
 import { protectResolver } from "../../users/users.utils";
 
-const resolverFn = async (_, { id }, { loggedInUser, client }) => {
+const resolverFn = async (_, { id, payload }, { loggedInUser, client }) => {
   try {
     const comment = await client.comment.findUnique({
       where: { id },
@@ -11,17 +11,21 @@ const resolverFn = async (_, { id }, { loggedInUser, client }) => {
     if (comment.userId !== loggedInUser.id)
       return { ok: false, error: "Not authorized." };
 
-    const deleteComment = await client.comment.delete({ where: { id } });
+    const newComment = await client.comment.update({
+      where: { id },
+      data: { payload },
+    });
+    if (!newComment) return { ok: false, error: "Cannot edit comment." };
 
     return { ok: true };
   } catch {
-    return { ok: false, error: "Cannot delete comment:(" };
+    return { ok: false, error: "Cannot edit comment:(" };
   }
 };
 
 const resolvers: Resolvers = {
   Mutation: {
-    deleteComment: protectResolver(resolverFn),
+    editComment: protectResolver(resolverFn),
   },
 };
 
