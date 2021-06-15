@@ -10,5 +10,6 @@ export default gql`
     caption: String
     hashtags: [Hashtag]
     likes: Int!
+    comments: Int!
   }
 `;
