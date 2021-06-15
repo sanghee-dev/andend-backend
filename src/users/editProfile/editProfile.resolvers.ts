@@ -1,7 +1,7 @@
 import { Resolvers } from "../../types";
 import * as bcrypt from "bcrypt";
 import { protectResolver } from "../users.utils";
-import { createWriteStream } from "fs";
+import { uploadToAWS } from "../../shared/shared.utils";
 
 const resolverFn = async (
   _,
@@ -10,23 +10,11 @@ const resolverFn = async (
 ) => {
   try {
     let avatarUrl = null;
-    if (avatar) {
-      const { filename, createReadStream } = await avatar;
-      const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
-      const readStream = createReadStream();
-      const whiteStream = createWriteStream(
-        process.cwd() + "/uploads/" + newFilename
-      );
-      readStream.pipe(whiteStream);
-      avatarUrl = `http://localhost:5000/static/${newFilename}`;
-      if (!avatarUrl) return { ok: false, error: "Cannot create url." };
-    }
+    if (avatar)
+      avatarUrl = await uploadToAWS(avatar, loggedInUser.id, "uploads");
 
     let uglyPassword = null;
-    if (newPassword) {
-      uglyPassword = await bcrypt.hash(newPassword, 10);
-      if (!uglyPassword) return { ok: false, error: "Cannot hash password." };
-    }
+    if (newPassword) uglyPassword = await bcrypt.hash(newPassword, 10);
 
     const updatedUser = await client.user.update({
       where: {
