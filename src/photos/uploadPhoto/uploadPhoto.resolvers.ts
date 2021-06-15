@@ -11,7 +11,7 @@ const resolverFn = async (_, { file, caption }, { loggedInUser, client }) => {
     const photo = await client.photo.create({
       data: {
         user: { connect: { id: loggedInUser.id } },
-        ...(fileUrl && { file: fileUrl }),
+        file: fileUrl,
         caption,
         hashtags: {
           connectOrCreate: processHashtags(caption),
