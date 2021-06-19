@@ -8,7 +8,7 @@ const resolvers: Resolvers = {
         skip: (page - 1) * 5,
         take: 5,
       }),
-    totalPhotos: async ({ id }, _, { client }) =>
+    photoNumber: async ({ id }, _, { client }) =>
       await client.photo.count({
         where: { hashtags: { some: { id } } },
       }),

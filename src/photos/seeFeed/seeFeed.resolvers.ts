@@ -1,7 +1,7 @@
 import { protectResolver } from "../../users/users.utils";
 import { Resolvers } from "../../types";
 
-const resolverFn = async (_, { page }, { loggedInUser, client }) => {
+const resolverFn = async (_, { page = 1 }, { loggedInUser, client }) => {
   try {
     const photos = await client.photo.findMany({
       where: {

@@ -2,9 +2,9 @@ import { Resolvers } from "../types";
 
 const resolvers: Resolvers = {
   User: {
-    totalFollowers: async ({ id }, _, { client }) =>
+    followerNumber: async ({ id }, _, { client }) =>
       await client.user.count({ where: { following: { some: { id } } } }),
-    totalFollowing: async ({ id }, _, { client }) =>
+    followingNumber: async ({ id }, _, { client }) =>
       await client.user.count({ where: { followers: { some: { id } } } }),
     isFollowing: async ({ id }, _, { loggedInUser, client }) => {
       const exists = await client.user.count({

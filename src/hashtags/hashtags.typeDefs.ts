@@ -7,6 +7,6 @@ export default gql`
     updateAt: String!
     hashtag: String!
     photos(page: Int!): [Photo]
-    totalPhotos: Int!
+    photoNumber: Int!
   }
 `;
