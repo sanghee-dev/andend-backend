@@ -1,7 +1,7 @@
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 dotenv.config();
-import * as express from "express";
-import * as logger from "morgan";
+import express from "express";
+import logger from "morgan";
 import { ApolloServer } from "apollo-server-express";
 import { typeDefs, resolvers } from "./schema";
 import client from "./client";
@@ -11,8 +11,9 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: async ({ req }) => {
-    const loggedInUser = await getUser(req.headers.token);
-    return { loggedInUser, client };
+    let token = (req.headers["x-access-token"] ||
+      req.headers["authorization"]) as string;
+    return { loggedInUser: await getUser(token), client };
   },
 });
 

@@ -1,3 +1,4 @@
+import client from "../client";
 import { Resolvers } from "../types";
 
 const resolvers: Resolvers = {
@@ -14,8 +15,24 @@ const resolvers: Resolvers = {
       await client.comment.findMany({ where: { photoId: id } }),
     commentNumber: async ({ id }, _, { client }) =>
       await client.comment.count({ where: { photoId: id } }),
-    isMine: async ({ userId }, _, { loggedInUser }) =>
-      userId === loggedInUser?.id,
+    isMine: async ({ userId }, _, { loggedInUser }) => {
+      if (!loggedInUser) return false;
+      return userId === loggedInUser?.id;
+    },
+    isLiked: async ({ id }, _, { loggedInUser }) => {
+      if (!loggedInUser) return false;
+      const ok = await client.like.findUnique({
+        where: {
+          userId_photoId: {
+            photoId: id,
+            userId: loggedInUser.id,
+          },
+        },
+        select: { id: true },
+      });
+      if (ok) return true;
+      return false;
+    },
   },
 };
 

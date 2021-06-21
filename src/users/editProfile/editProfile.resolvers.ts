@@ -1,5 +1,5 @@
 import { Resolvers } from "../../types";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import { protectResolver } from "../users.utils";
 import { uploadToAWS } from "../../shared/shared.utils";
 

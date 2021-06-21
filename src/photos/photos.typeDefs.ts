@@ -13,5 +13,6 @@ export default gql`
     comments: [Comment]
     commentNumber: Int!
     isMine: Boolean!
+    isLiked: Boolean!
   }
 `;

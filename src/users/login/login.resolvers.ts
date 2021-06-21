@@ -1,6 +1,6 @@
 import { Resolvers } from "../../types";
-import * as bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const resolvers: Resolvers = {
   Mutation: {

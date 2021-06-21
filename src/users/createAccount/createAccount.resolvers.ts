@@ -1,5 +1,5 @@
 import { Resolvers } from "../../types";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 const resolvers: Resolvers = {
   Mutation: {
