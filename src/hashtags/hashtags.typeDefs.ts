@@ -3,8 +3,8 @@ import { gql } from "apollo-server-core";
 export default gql`
   type Hashtag {
     id: Int!
-    createAt: String!
-    updateAt: String!
+    createdAt: String!
+    updatedAt: String!
     hashtag: String!
     photos(page: Int!): [Photo]
     photoNumber: Int!

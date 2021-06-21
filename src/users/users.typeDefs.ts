@@ -3,8 +3,8 @@ import { gql } from "apollo-server-core";
 export default gql`
   type User {
     id: Int!
-    createAt: String!
-    updateAt: String!
+    createdAt: String!
+    updatedAt: String!
     firstName: String!
     lastName: String
     username: String!
