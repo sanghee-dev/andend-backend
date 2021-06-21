@@ -10,6 +10,8 @@ import { getUser } from "./users/users.utils";
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  playground: true,
+  introspection: true,
   context: async ({ req }) => {
     let token = (req.headers["x-access-token"] ||
       req.headers["authorization"]) as string;
