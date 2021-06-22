@@ -1,7 +1,7 @@
 import { protectResolver } from "../../users/users.utils";
 import { Resolvers } from "../../types";
 
-const resolverFn = async (_, { page }, { loggedInUser, client }) => {
+const resolverFn = async (_, { offset }, { loggedInUser, client }) => {
   try {
     const photos = await client.photo.findMany({
       where: {
@@ -11,8 +11,8 @@ const resolverFn = async (_, { page }, { loggedInUser, client }) => {
         ],
       },
       orderBy: { createdAt: "desc" },
-      skip: (page - 1) * 5,
-      take: 5,
+      take: 2,
+      skip: offset,
     });
     if (!photos) return { ok: false, error: "Photos not found." };
 

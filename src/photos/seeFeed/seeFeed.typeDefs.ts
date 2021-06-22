@@ -7,6 +7,6 @@ export default gql`
     photos: [Photo]
   }
   type Query {
-    seeFeed(page: Int!): SeeFeedResult!
+    seeFeed(offset: Int!): SeeFeedResult!
   }
 `;
