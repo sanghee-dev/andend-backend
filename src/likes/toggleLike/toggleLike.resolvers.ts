@@ -1,12 +1,14 @@
 import { Resolvers } from "../../types";
 import { protectResolver } from "../../users/users.utils";
 
-const resolverFn = async (_, { photoId }, { loggedInUser, client }) => {
+const resolverFn = async (_, { id }, { loggedInUser, client }) => {
   try {
-    const photo = await client.photo.findUnique({ where: { id: photoId } });
+    const photo = await client.photo.findUnique({ where: { id } });
     if (!photo) return { ok: false, error: "Photo not found." };
 
-    const likeWhere = { userId_photoId: { userId: loggedInUser.id, photoId } };
+    const likeWhere = {
+      userId_photoId: { userId: loggedInUser.id, photoId: id },
+    };
     const like = await client.like.findUnique({ where: likeWhere });
     if (like) {
       await client.like.delete({ where: likeWhere });
