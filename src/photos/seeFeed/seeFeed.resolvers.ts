@@ -3,7 +3,7 @@ import { Resolvers } from "../../types";
 
 const resolverFn = async (_, { offset }, { loggedInUser, client }) => {
   try {
-    const photos = await client.photo.findMany({
+    return client.photo.findMany({
       where: {
         OR: [
           { user: { followers: { some: { id: loggedInUser.id } } } },
@@ -14,10 +14,8 @@ const resolverFn = async (_, { offset }, { loggedInUser, client }) => {
       take: 2,
       skip: offset,
     });
-
-    return { photos };
   } catch {
-    return { photos: [] };
+    return [];
   }
 };
 
