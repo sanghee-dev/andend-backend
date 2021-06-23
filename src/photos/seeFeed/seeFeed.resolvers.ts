@@ -14,11 +14,10 @@ const resolverFn = async (_, { offset }, { loggedInUser, client }) => {
       take: 2,
       skip: offset,
     });
-    if (!photos) return { ok: false, error: "Photos not found." };
 
-    return { ok: true, photos };
+    return { photos };
   } catch {
-    return { ok: false, error: "Cannot see feed:(" };
+    return { photos: [] };
   }
 };
 
