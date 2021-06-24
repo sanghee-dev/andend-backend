@@ -6,7 +6,7 @@ const resolvers: Resolvers = {
       try {
         const likes = await client.like.findMany({
           where: { photoId: id },
-          select: { user: { select: { username: true, avatar: true } } },
+          select: { user: true },
           take: 2,
           skip: offset,
         });
