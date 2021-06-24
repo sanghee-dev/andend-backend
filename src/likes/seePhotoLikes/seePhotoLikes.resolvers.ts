@@ -2,13 +2,13 @@ import { Resolvers } from "../../types";
 
 const resolvers: Resolvers = {
   Query: {
-    seePhotoLikes: async (_, { id, page }, { client }) => {
+    seePhotoLikes: async (_, { id, offset }, { client }) => {
       try {
         const likes = await client.like.findMany({
           where: { photoId: id },
           select: { user: { select: { username: true } } },
-          skip: (page - 1) * 5,
-          take: 5,
+          take: 2,
+          skip: offset,
         });
         if (!likes) return { ok: false, error: "Like not found." };
 

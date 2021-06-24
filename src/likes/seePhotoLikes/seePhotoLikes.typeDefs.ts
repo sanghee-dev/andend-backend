@@ -7,6 +7,6 @@ export default gql`
     users: [User]
   }
   type Query {
-    seePhotoLikes(id: Int!, page: Int!): SeePhotoLikesResult!
+    seePhotoLikes(id: Int!, offset: Int!): SeePhotoLikesResult!
   }
 `;
