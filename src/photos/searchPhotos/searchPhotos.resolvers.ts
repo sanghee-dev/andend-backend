@@ -6,7 +6,7 @@ const resolvers: Resolvers = {
       try {
         const photos = await client.photo.findMany({
           where: { caption: { contains: keyword } },
-          take: 2,
+          take: 8,
           skip: offset,
         });
         if (!photos) return { ok: false, error: "Photos not found." };
