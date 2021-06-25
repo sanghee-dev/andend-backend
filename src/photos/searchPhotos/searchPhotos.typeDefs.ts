@@ -7,6 +7,6 @@ export default gql`
     photos: [Photo]
   }
   type Query {
-    searchPhotos(keyword: String!, page: Int!): SearchPhotosResult!
+    searchPhotos(keyword: String!, offset: Int!): SearchPhotosResult!
   }
 `;
